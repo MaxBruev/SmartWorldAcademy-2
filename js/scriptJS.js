@@ -28,9 +28,11 @@ function nameHeader (jsonObj) {
 
 function fieldsSection(jsonObj) {
     let fields = jsonObj['fields'];
+    let buttons = jsonObj['buttons'];
+    let myButton = document.createElement('button');
+    let myDiv = document.createElement('div');
 
     for (let i = 0; i < fields.length; i++) {
-        let myDiv = document.createElement('div');
         let myP = document.createElement('p');
         let myInput = document.createElement('input');
 
@@ -38,26 +40,19 @@ function fieldsSection(jsonObj) {
 
         let input = fields[i].input;
 
-        for (let j = 0; j < input.length; j++) {
-            let listInput= document.createElement('input');
-            myInput.appendChild(listInput);
-            myInput.getAttribute('placeholder');
-        }
+        myInput.placeholder = input.placeholder;
+        myInput.type = input.type;
 
         myDiv.appendChild(myP);
         myDiv.appendChild(myInput);
 
         section.appendChild(myDiv);
 
-        console.log(myInput)
+        console.log(myInput);
     }
+    for (let i = 0; i < buttons.length; i++) {
+        myButton.innerText = buttons[i].text;
+        myDiv.appendChild(myButton);
+        console.log(myButton);
+    } 
 }
-
-
-
-
-
-
-
-
-
