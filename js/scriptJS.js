@@ -28,6 +28,7 @@ function nameHeader (jsonObj) {
 
 function fieldsSection(jsonObj) {
     let fields = jsonObj['fields'];
+    //let references = jsonObj['references'];
     let buttons = jsonObj['buttons'];
     let myButton = document.createElement('button');
 
@@ -49,6 +50,24 @@ function fieldsSection(jsonObj) {
 
         console.log(myInput);
     }
+        // for (let i = 0; i < references.length; i++) {
+    //     let myReferences = document.createElement('input');
+    //
+    //     let input = references[i].input;
+    //
+    //     myReferences.innerText = references[i].text;
+    //
+    //     myReferences.type = input.type;
+    //     myReferences.required = input.required;
+    //     myReferences.checked = input.checked;
+    //     myReferences.ref = input.ref;
+    //
+    //     myDiv.appendChild(myReferences);
+    //
+    //     section.appendChild(myDiv);
+    //
+    //     console.log(myReferences);
+    // }
     for (let i = 0; i < buttons.length; i++) {
         myButton.innerText = buttons[i].text;
         myDiv.appendChild(myButton);
