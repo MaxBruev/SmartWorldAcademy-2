@@ -76,6 +76,6 @@ function fieldsSection(jsonObj) {
 }
 
 fileInput.onclick = function () {
-    document.querySelector('section').removeChild(myDiv);
-    document.querySelector('header').removeChild(myH1);
+    header.innerHTML = "";
+    section.innerHTML = "";
 }
