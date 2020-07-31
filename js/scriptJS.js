@@ -4,6 +4,12 @@ let fileInput = document.querySelector('#file_input');
 let myH1 = document.createElement('h1');
 let myDiv = document.createElement('div');
 
+fileInput.onclick = function () {
+    header.innerHTML = "";
+    section.innerHTML = "";
+    myDiv = null;
+}
+
 fileInput.addEventListener('change', function (event) {
 
     let file = fileInput.files[0];
@@ -35,7 +41,8 @@ function fieldsSection(jsonObj) {
     for (let i = 0; i < fields.length; i++) {
         let myP = document.createElement('p');
         let myInput = document.createElement('input');
-
+        
+        myDiv = document.createElement('div');
         myP.textContent = fields[i].label;
 
         let input = fields[i].input;
@@ -73,9 +80,4 @@ function fieldsSection(jsonObj) {
         myDiv.appendChild(myButton);
         console.log(myButton);
     } 
-}
-
-fileInput.onclick = function () {
-    header.innerHTML = "";
-    section.innerHTML = "";
 }
