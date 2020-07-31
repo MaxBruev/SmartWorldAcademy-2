@@ -57,7 +57,7 @@ function fieldsSection(jsonObj) {
 
         console.log(myInput);
     }
-        // for (let i = 0; i < references.length; i++) {
+    // for (let i = 0; i < references.length; i++) {
     //     let myReferences = document.createElement('input');
     //
     //     let input = references[i].input;
