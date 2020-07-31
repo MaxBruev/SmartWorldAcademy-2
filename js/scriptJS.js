@@ -1,5 +1,5 @@
-const section = document.querySelector('section');
-const header = document.querySelector('header');
+let section = document.querySelector('section');
+let header = document.querySelector('header');
 let fileInput = document.querySelector('#file_input');
 let myH1 = document.createElement('h1');
 let myDiv = document.createElement('div');
