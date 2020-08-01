@@ -1,14 +1,17 @@
+$(document).ready(function(){
+
 let section = document.querySelector('section');
 let header = document.querySelector('header');
 let fileInput = document.querySelector('#file_input');
 let myH1 = document.createElement('h1');
 let myDiv = document.createElement('div');
 
+//Очищает страницу и переменную, для последующиего повторного записывания
 fileInput.onclick = function () {
     header.innerHTML = "";
     section.innerHTML = "";
     myDiv = null;
-}
+};
 
 fileInput.addEventListener('change', function (event) {
 
@@ -26,15 +29,15 @@ fileInput.addEventListener('change', function (event) {
     }
 
 });
-
+//Создает тэг h1 и заполняет его элементом 'name' из массива файла json
 function nameHeader (jsonObj) {
     myH1.textContent = jsonObj['name'];
     header.appendChild(myH1);
 }
-
+//Запоняет тэг section элементами 'fields', 'references', 'buttons' и их подэлементами 'input' из массива файла json
 function fieldsSection(jsonObj) {
     let fields = jsonObj['fields'];
-    //let references = jsonObj['references'];
+    let references = jsonObj['references'];
     let buttons = jsonObj['buttons'];
     let myButton = document.createElement('button');
 
@@ -50,6 +53,9 @@ function fieldsSection(jsonObj) {
         myInput.placeholder = input.placeholder || ' ';
         myInput.type = input.type;
 
+        $('[type="tel"]').mask('+7 (999) 999-99-99');
+
+
         myDiv.appendChild(myP);
         myDiv.appendChild(myInput);
 
@@ -57,27 +63,33 @@ function fieldsSection(jsonObj) {
 
         console.log(myInput);
     }
-    // for (let i = 0; i < references.length; i++) {
-    //     let myReferences = document.createElement('input');
-    //
-    //     let input = references[i].input;
-    //
-    //     myReferences.innerText = references[i].text;
-    //
-    //     myReferences.type = input.type;
-    //     myReferences.required = input.required;
-    //     myReferences.checked = input.checked;
-    //     myReferences.ref = input.ref;
-    //
-    //     myDiv.appendChild(myReferences);
-    //
-    //     section.appendChild(myDiv);
-    //
-    //     console.log(myReferences);
-    // }
+    if (!references) {
+        return false;
+    } else {
+        for (let i = 0; i < references.length; i++) {
+            let myReferences = document.createElement('input');
+        
+            let input = references[i].input;
+        
+            myReferences.innerText = references[i].text;
+        
+            myReferences.type = references[i].type;
+            myReferences.required = references[i].required;
+            myReferences.checked = references[i].checked;
+            myReferences.ref = references[i].ref;
+        
+            myDiv.appendChild(myReferences);
+        
+            section.appendChild(myDiv);
+        
+            console.log(myReferences);
+        }
+    }
+
     for (let i = 0; i < buttons.length; i++) {
         myButton.innerText = buttons[i].text;
         myDiv.appendChild(myButton);
         console.log(myButton);
-    } 
+    }
 }
+});
