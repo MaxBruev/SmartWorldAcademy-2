@@ -49,12 +49,14 @@ $(document).ready(function(){
             myP.textContent = fields[i].label;
 
             let input = fields[i].input;
-            let myMask = myInput.setAttribute('mask', input.mask || ' ');
+            
 
             myInput.placeholder = input.placeholder || ' ';
             myInput.type = input.type;
+            myInput.setAttribute('mask', input.mask || ' ');
 
-            $('[mask = "+7 (999) 99-99-999"]').mask('+7 (999) 999-99-99');
+            //$('[mask = "+7 (999) 99-99-999"]').mask('+7 (999) 999-99-99'); так не работает
+            //$('[type = "tel"]').mask('+7 (999) 999-99-99'); так работает, если в json файле добавить атрибут type = "tel" 
 
             myDiv.appendChild(myP);
             myDiv.appendChild(myInput);
