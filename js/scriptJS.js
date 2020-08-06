@@ -56,6 +56,8 @@ $(document).ready(function(){
                 input.type = 'text';
                 $(myInput).mask(input.mask);
             }
+            
+            myInput.type = input.type;
 
             myDiv.appendChild(myP);
             myDiv.appendChild(myInput);
