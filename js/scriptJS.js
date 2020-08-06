@@ -50,21 +50,21 @@ $(document).ready(function(){
 
             let input = fields[i].input;
             
-
             myInput.placeholder = input.placeholder || ' ';
-            myInput.type = input.type;
-            myInput.setAttribute('mask', input.mask || ' ');
 
-            //$('[mask = "+7 (999) 99-99-999"]').mask('+7 (999) 999-99-99'); так не работает
-            //$('[type = "tel"]').mask('+7 (999) 999-99-99'); так работает, если в json файле добавить атрибут type = "tel" 
+            if(input.mask !== undefined){
+                input.type = 'text';
+                $(myInput).mask(input.mask);
+            }
 
             myDiv.appendChild(myP);
             myDiv.appendChild(myInput);
 
             section.appendChild(myDiv);
 
+            console.log(input.mask, input.type);
             console.log(myInput);
-            console.log(myMask);
+
         }
         if (!references) {
             return false;
