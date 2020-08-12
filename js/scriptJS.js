@@ -58,11 +58,11 @@ $(document).ready(function(){
             }
 
             if(input.type === 'technology') {
-
-                input.technologies.forEach((techelem,i) =>  myInput.append(buildTechnology(techelem, i)));
+                let container = document.createElement('div');
+                container.appendChild(myP);
+                input.technologies.forEach((techelem,i) =>  container.append(buildTechnology(techelem, i)));
 
                 function buildTechnology(techelem, i){
-
                     let technologies = document.createElement('input');
                     let label = document.createElement('label');
 
@@ -72,9 +72,14 @@ $(document).ready(function(){
                     label.textContent = techelem;
                     label.className = 'btn btn-primary btn-tags';
 
-                    myDiv.append(technologies);
+                    technologies.append(myInput);
+                    myDiv.appendChild(technologies);
                     return label;
                 }
+                myDiv = container;
+
+                section.appendChild(myDiv);
+                continue;
             }
 
             if(input.type === 'file' && input.filetype !== undefined){
@@ -113,28 +118,29 @@ $(document).ready(function(){
             console.log(myInput);
 
         }
-        if (!references) {
-            return false;
-        } else {
-            for (let i = 0; i < references.length; i++) {
-                let myReferences = document.createElement('input');
+        // if (!references) {
+        //     return false;
+        // } else {
+        //     for (let i = 0; i < references.length; i++) {
+        //         let myRefInput = document.createElement('input');
+        //         let myRef = document.createElement('a');
+        //         myRef.setAttribute('href', '#');
+        //
+        //
+        //         myRefInput.type = references[i].type;
+        //         myRefInput.required = references[i].required;
+        //         myRefInput.checked = references[i].checked;
+        //
+        //         myRef.innerText = references[i].text;
+        //
+        //         myDiv.appendChild(myRef);
+        //         myDiv.appendChild(myRefInput);
+        //         section.appendChild(myDiv);
+        //
+        //         console.log(myRefInput);
+        //     }
+        // }
 
-                let input = references[i].input;
-
-                myReferences.innerText = references[i].text;
-
-                myReferences.type = references[i].type;
-                myReferences.required = references[i].required;
-                myReferences.checked = references[i].checked;
-                myReferences.ref = references[i].ref;
-
-                myDiv.appendChild(myReferences);
-
-                section.appendChild(myDiv);
-
-                console.log(myReferences);
-            }
-        }
 
         for (let i = 0; i < buttons.length; i++) {
             myButton.innerText = buttons[i].text;
@@ -142,4 +148,4 @@ $(document).ready(function(){
             console.log(myButton);
         }
     }
-})
+});
