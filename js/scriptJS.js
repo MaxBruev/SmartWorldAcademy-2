@@ -56,8 +56,53 @@ $(document).ready(function(){
                 input.type = 'text';
                 $(myInput).mask(input.mask);
             }
-            
+
+            if(input.type === 'technology') {
+
+                input.technologies.forEach((techelem,i) =>  myInput.append(buildTechnology(techelem, i)));
+
+                function buildTechnology(techelem, i){
+
+                    let technologies = document.createElement('input');
+                    let label = document.createElement('label');
+
+                    technologies.type = 'checkbox';
+
+                    label.htmlFor = 'option' + i;
+                    label.textContent = techelem;
+                    label.className = 'btn btn-primary btn-tags';
+
+                    myDiv.append(technologies);
+                    return label;
+                }
+            }
+
+            if(input.type === 'file' && input.filetype !== undefined){
+
+                myInput.setAttribute('multiple', input.multiple);
+
+                let arr = '';
+
+                input.filetype.forEach(elem =>{
+                    arr += '.' + elem + ', ';
+                    myInput.setAttribute('accept', arr);
+                });
+            }
+
+            if(input.type === 'color') {
+                let datalist = document.createElement('datalist');
+                myInput.setAttribute('list','colorlist' + i);
+
+                for(let key  of input.colors){
+                    let option = document.createElement('option');
+                    option.value = key;
+                    datalist.append(option);
+                }
+                myInput.append(datalist);
+            }
+
             myInput.type = input.type;
+            myInput.filetype = input.filetype;
 
             myDiv.appendChild(myP);
             myDiv.appendChild(myInput);
@@ -97,4 +142,4 @@ $(document).ready(function(){
             console.log(myButton);
         }
     }
-});
+})
