@@ -49,7 +49,7 @@ $(document).ready(function(){
             myP.textContent = fields[i].label;
 
             let input = fields[i].input;
-            
+
             myInput.placeholder = input.placeholder || ' ';
 
             if(input.mask !== undefined){
@@ -70,20 +70,16 @@ $(document).ready(function(){
 
                     label.htmlFor = 'option' + i;
                     label.textContent = techelem;
-                    label.className = 'btn btn-primary btn-tags';
 
-                    technologies.append(myInput);
-                    myDiv.appendChild(technologies);
+                    container.appendChild(technologies);
                     return label;
                 }
                 myDiv = container;
-
                 section.appendChild(myDiv);
                 continue;
             }
 
             if(input.type === 'file' && input.filetype !== undefined){
-
                 myInput.setAttribute('multiple', input.multiple);
 
                 let arr = '';
@@ -97,6 +93,7 @@ $(document).ready(function(){
             if(input.type === 'color') {
                 let datalist = document.createElement('datalist');
                 myInput.setAttribute('list','colorlist' + i);
+                datalist.id = 'colorlist' + i;
 
                 for(let key  of input.colors){
                     let option = document.createElement('option');
@@ -116,36 +113,68 @@ $(document).ready(function(){
 
             console.log(input.mask, input.type);
             console.log(myInput);
-
         }
-        // if (!references) {
-        //     return false;
-        // } else {
-        //     for (let i = 0; i < references.length; i++) {
-        //         let myRefInput = document.createElement('input');
-        //         let myRef = document.createElement('a');
-        //         myRef.setAttribute('href', '#');
-        //
-        //
-        //         myRefInput.type = references[i].type;
-        //         myRefInput.required = references[i].required;
-        //         myRefInput.checked = references[i].checked;
-        //
-        //         myRef.innerText = references[i].text;
-        //
-        //         myDiv.appendChild(myRef);
-        //         myDiv.appendChild(myRefInput);
-        //         section.appendChild(myDiv);
-        //
-        //         console.log(myRefInput);
-        //     }
-        // }
 
+        if(references !== undefined){
+            let row = document.createElement('div');
+            let form = document.createElement('form');
 
-        for (let i = 0; i < buttons.length; i++) {
-            myButton.innerText = buttons[i].text;
-            myDiv.appendChild(myButton);
-            console.log(myButton);
+            references.forEach(function(references, i){
+
+                let p = document.createElement('p');
+                let a = document.createElement('a');
+
+                a.textContent = references.text;
+                a.name = references.ref;
+                a.href = '#';
+
+                if(references.hasOwnProperty('text without ref'))
+                    p.textContent = references['text without ref'] + ' ';
+
+                if(form.name === 'register')
+                    row.className = ' text-center';
+
+                if(references.input !== undefined){
+                    p.remove();
+                    let wrapper = buildWrapper(references);
+                    row.className = 'pl-4';
+                    form.append(wrapper);
+                }
+                else{
+                    p.append(a);
+                    row.append(p);
+                }
+            });
+
+            form.append(row);
+            section.appendChild(form);
         }
+
+        if(jsonObj.buttons !== undefined) {
+
+            let row = document.createElement('div');
+            row.className = 'row justify-content-center mt-4';
+
+            jsonObj.buttons.forEach(function (buttons, i) {
+
+                let col = document.createElement('div');
+                let btn = document.createElement('input');
+
+                btn.className = 'button_sent';
+
+                btn.type = 'submit';
+                btn.value = buttons.text;
+
+                col.append(btn);
+                row.append(col);
+                section.appendChild(btn);
+                section.appendChild(col);
+            });
+        }
+    }
+    function buildWrapper(fields){
+        let formGroup = document.createElement('input');
+        formGroup.type = 'checkbox';
+        return formGroup;
     }
 });
